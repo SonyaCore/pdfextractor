@@ -37,4 +37,9 @@ if __name__ == "__main__":
         help='\t\tOutput Name',
     )
     args = parser.parse_args()
-    PdfExtract(args.name,args.output,args.pages)
+    try:
+        PdfExtract(args.name,args.output,args.pages)
+    except FileNotFoundError:
+        print(f'{args.name} Not Found!')
+    
+
