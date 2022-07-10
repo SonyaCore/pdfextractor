@@ -12,3 +12,7 @@
   --output OUTPUT, -o OUTPUT
   Output Name
   ```
+### ‌Installing Requirements
+```
+pip3 install -r requirements.txt
+```
