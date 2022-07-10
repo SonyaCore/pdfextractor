@@ -1,8 +1,8 @@
 # pdfextractor
 # Simple PDF Extractor Program that Extract PDF to a file
-usage : 
-options:
-  
+
+## Usage :   
+  ```
   --pages [PAGES], -p [PAGES]
   Specify Total Pages
   
@@ -11,3 +11,4 @@ options:
   
   --output OUTPUT, -o OUTPUT
   Output Name
+  ```
