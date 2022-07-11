@@ -2,9 +2,12 @@
 import PyPDF2
 
 class PdfExtract():
-    def __init__(self,book,output,pages=0):
+    def __init__(self,book,output,pages):
         self.book = open(book,'rb')
         self.reader = PyPDF2.PdfFileReader(self.book)
+
+        if not pages:
+            pages = self.reader.getNumPages()
 
         for x in range(pages):
             page = self.reader.getPage(x)
