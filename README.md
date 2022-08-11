@@ -3,14 +3,17 @@
 
 ## Usage :   
   ```
-  --pages [PAGES], -p [PAGES]
-  Specify Total Pages
-  
-  --name NAME, -n NAME  
-  Name of PDF
-  
-  --output OUTPUT, -o OUTPUT
-  Output Name
+--pages [PAGES], -p [PAGES]
+Specify Total Pages
+
+--name NAME, -n NAME  
+Name of PDF
+
+--output OUTPUT, -o OUTPUT
+Output Name
+
+--readmeta, -r
+Show Metadata
   ```
 ### ‌Installing Requirements
 ```
