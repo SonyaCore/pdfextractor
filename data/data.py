@@ -14,7 +14,7 @@ class PdfExtract():
         self.writer = PdfWriter()
         self.output = output
 
-    def PDF_define_pages(self,pages):
+    def ExtractPDF(self,pages):
         """Extracting Pages of the PDF"""
         if not pages:
             pages = self.reader.getNumPages()
@@ -35,7 +35,7 @@ class PdfExtract():
         print(f"{Fore.GREEN}Title:{Fore.RESET} {meta.title}")
 
     def encrypt_pdf(self,password='123'):
-        """encrypt pdf with password (not complete)"""
+        """encrypt pdf with password (not   complete)"""
         self.writer = PdfWriter()
 
         self.writer.encrypt(password)

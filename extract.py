@@ -42,7 +42,7 @@ if __name__ == "__main__":
         extract = PdfExtract(args.name,args.output)
         
         if args.output:
-            extract.PDF_define_pages(args.pages)
+            extract.ExtractPDF(args.pages)
 
         if args.metadata == True:
             extract.Getmetadata()
