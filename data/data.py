@@ -1,6 +1,7 @@
 #!/bin/env python3
 import PyPDF2
 from PyPDF2 import PdfReader, PdfWriter
+from colorama import Fore
 
 import logging
 logger = logging.getLogger("PyPDF2")
@@ -31,11 +32,11 @@ class PdfExtract():
         """Getting the Metadata of the PDF"""
         metainfo = PdfReader(self.book)
         meta = metainfo.metadata
-        print(f"Author: {meta.author}")
-        print(f"Creator: {meta.creator}")
-        print(f"Producer: {meta.producer}")
-        print(f"Subject: {meta.subject}")
-        print(f"Title: {meta.title}")
+        print(f"{Fore.GREEN}Author:{Fore.RESET} {meta.author}")
+        print(f"{Fore.GREEN}Creator:{Fore.RESET} {meta.creator}")
+        print(f"{Fore.GREEN}Producer:{Fore.RESET} {meta.producer}")
+        print(f"{Fore.GREEN}Subject:{Fore.RESET} {meta.subject}")
+        print(f"{Fore.GREEN}Title:{Fore.RESET} {meta.title}")
 
     def encrypt_pdf(self,password='123'):
         """encrypt pdf with password (not complete)"""
