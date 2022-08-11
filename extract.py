@@ -1,32 +1,8 @@
-#!/bin/env python3
-import PyPDF2
-from PyPDF2 import PdfReader
-
-import logging
-logger = logging.getLogger("PyPDF2")
-logger.setLevel(logging.ERROR)
-
-class PdfExtract():
-    def __init__(self,book,output,pages=0):
-        self.book = open(book,'rb')
-        self.reader = PyPDF2.PdfFileReader(self.book)
-
-        for x in range(pages):
-            page = self.reader.getPage(x)
-            with open(output,'a') as obj:
-                obj.write(page.extractText())
-
-    def metadata(self):
-        reader = PdfReader(self.book)
-        meta = reader.metadata
-        print(meta.author)
-        print(meta.creator)
-        print(meta.producer)
-        print(meta.subject)
-        print(meta.title)
+#!/usr/bin/env python3
+import argparse
+from data.data import *
 
 if __name__ == "__main__":
-    import argparse
     parser = argparse.ArgumentParser(description='PDF Extractor')
 
     parser.add_argument(
@@ -37,6 +13,13 @@ if __name__ == "__main__":
         type=int,
         nargs="?",
         help="\tSpecify Total Pages",
+    )
+    parser.add_argument(
+        "--all",
+        "-a",        
+        action='store_true',
+        required=False,
+        help='\t\tExtract All Pages'
     )
     parser.add_argument(
         "--name",
@@ -63,13 +46,13 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     try:
+        if args.pages:
+            PdfExtract(args.name,args.output).PDF_define_pages(args.pages)
+        elif args.all:
+            PdfExtract(args.name,args.output).PDF_all_pages()
 
-        # Extract PDF
-        argument = PdfExtract(args.name,args.output,args.pages)
-
-        # Read Metadata
         if args.readmeta == True:
-            PdfExtract.metadata(argument)
+            PdfExtract(args.name,args.output).Getmetadata()
 
     except FileNotFoundError:
         print(f'{args.name} Not Found!')
@@ -77,4 +60,7 @@ if __name__ == "__main__":
         print(f'{args.pages} Defined Pages are Bigger than Actual Book Page')
 
     finally:
-        print(f"{args.name} written to {args.output}")
+        if  args.pages:
+            print(f"\n{args.name} {args.pages} number of pages written to {args.output}")
+        if  args.all == True:
+            print(f"\n{args.name} all pages written to {args.output}")
