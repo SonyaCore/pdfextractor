@@ -12,7 +12,7 @@ Name of PDF
 --output OUTPUT, -o OUTPUT
 Output Name
 
---readmeta, -r
+--metadata, -m
 Show Metadata
   ```
 ### ‌Installing Requirements
