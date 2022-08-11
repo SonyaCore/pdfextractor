@@ -15,13 +15,6 @@ if __name__ == "__main__":
         help="\tSpecify Total Pages",
     )
     parser.add_argument(
-        "--all",
-        "-a",        
-        action='store_true',
-        required=False,
-        help='\t\tExtract All Pages'
-    )
-    parser.add_argument(
         "--name",
         "-n",
         action="store",
@@ -46,13 +39,13 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     try:
-        if args.pages:
-            PdfExtract(args.name,args.output).PDF_define_pages(args.pages)
-        elif args.all:
-            PdfExtract(args.name,args.output).PDF_all_pages()
+        extract = PdfExtract(args.name,args.output)
+        
+        if args.output:
+            extract.PDF_define_pages(args.pages)
 
         if args.metadata == True:
-            PdfExtract(args.name,args.output).Getmetadata()
+            extract.Getmetadata()
 
     except FileNotFoundError:
         print(f'{args.name} Not Found!')
@@ -62,5 +55,5 @@ if __name__ == "__main__":
     finally:
         if  args.pages:
             print(f"\n{args.name} {args.pages} number of pages written to {args.output}")
-        if  args.all == True:
+        elif args.output:
             print(f"\n{args.name} all pages written to {args.output}")
