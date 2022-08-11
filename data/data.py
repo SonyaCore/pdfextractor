@@ -14,17 +14,13 @@ class PdfExtract():
         self.writer = PdfWriter()
         self.output = output
 
-    def PDF_define_pages(self,pages=0):
-        """Defining the Total Number of Pages for Extraction"""
+    def PDF_define_pages(self,pages):
+        """Extracting Pages of the PDF"""
+        if not pages:
+            pages = self.reader.getNumPages()
+
         for number in range(pages):
             page = self.reader.getPage(number)
-            with open(self.output,'a') as obj:
-                obj.write(page.extractText())
-
-    def PDF_all_pages(self):
-        """Extracting all Pages of PDF"""
-        for totalnumber in range(self.reader.getNumPages()):
-            page = self.reader.getPage(totalnumber)
             with open(self.output,'a') as obj:
                 obj.write(page.extractText())
 
