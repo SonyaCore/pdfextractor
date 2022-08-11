@@ -6,9 +6,6 @@
 --pages [PAGES], -p [PAGES]
 Specify Total Pages
 
---all, -a
-Extract All Pages
-
 --name NAME, -n NAME  
 Name of PDF
 
