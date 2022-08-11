@@ -1,5 +1,10 @@
 #!/bin/env python3
 import PyPDF2
+from PyPDF2 import PdfReader
+
+import logging
+logger = logging.getLogger("PyPDF2")
+logger.setLevel(logging.ERROR)
 
 class PdfExtract():
     def __init__(self,book,output,pages=0):
@@ -10,6 +15,15 @@ class PdfExtract():
             page = self.reader.getPage(x)
             with open(output,'a') as obj:
                 obj.write(page.extractText())
+
+    def metadata(self):
+        reader = PdfReader(self.book)
+        meta = reader.metadata
+        print(meta.author)
+        print(meta.creator)
+        print(meta.producer)
+        print(meta.subject)
+        print(meta.title)
 
 if __name__ == "__main__":
     import argparse
@@ -36,10 +50,31 @@ if __name__ == "__main__":
         action="store",
         help='\t\tOutput Name',
     )
+
+    optionalparser = parser.add_argument_group( 'Optional Arguments' )
+
+    optionalparser.add_argument(
+        "--readmeta",
+        "-r",        
+        action='store_true',
+        required=False,
+        help='\t\tShow Metadata'
+    )
+
     args = parser.parse_args()
     try:
-        PdfExtract(args.name,args.output,args.pages)
+
+        # Extract PDF
+        argument = PdfExtract(args.name,args.output,args.pages)
+
+        # Read Metadata
+        if args.readmeta == True:
+            PdfExtract.metadata(argument)
+
     except FileNotFoundError:
         print(f'{args.name} Not Found!')
-    
+    except IndexError:
+        print(f'{args.pages} Defined Pages are Bigger than Actual Book Page')
 
+    finally:
+        print(f"{args.name} written to {args.output}")
