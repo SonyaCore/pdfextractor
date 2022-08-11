@@ -37,8 +37,8 @@ if __name__ == "__main__":
     optionalparser = parser.add_argument_group( 'Optional Arguments' )
 
     optionalparser.add_argument(
-        "--readmeta",
-        "-r",        
+        "--metadata",
+        "-m",        
         action='store_true',
         required=False,
         help='\t\tShow Metadata'
@@ -51,7 +51,7 @@ if __name__ == "__main__":
         elif args.all:
             PdfExtract(args.name,args.output).PDF_all_pages()
 
-        if args.readmeta == True:
+        if args.metadata == True:
             PdfExtract(args.name,args.output).Getmetadata()
 
     except FileNotFoundError:
