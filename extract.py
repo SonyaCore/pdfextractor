@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
-from data.data import *
+from data.pdf import *
+from data.encrypt import encrypt_pdf , decrypt_pdf 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='PDF Extractor')
@@ -37,6 +38,31 @@ if __name__ == "__main__":
         help='\t\tShow Metadata'
     )
 
+    encryptparser = parser.add_argument_group( 'Encryption' )
+    
+    encryptparser.add_argument(
+        "--encrypt",
+        "-e",        
+        action='store_true',
+        required=False,
+        help='\t\tEncrypt PDF'
+    )
+    encryptparser.add_argument(
+        "--decrypt",
+        "-d",        
+        action='store_true',
+        required=False,
+        help='\t\tDecrypt PDF'
+    )
+    encryptparser.add_argument(
+        "--password",
+        "-pass",
+        action="store",
+        default='123',
+        type=str,
+        nargs="?",
+        help="\tSet Password",
+    )
     args = parser.parse_args()
     try:
         extract = PdfExtract(args.name,args.output)
@@ -46,6 +72,14 @@ if __name__ == "__main__":
 
         if args.metadata == True:
             extract.Getmetadata()
+
+        if args.encrypt == True:
+            encrypt_pdf(args.name,args.password)
+            print(f"{args.name} encrypted")
+
+        elif args.decrypt == True:
+            decrypt_pdf(args.name,args.password)
+            print(f"{args.name} decrypted")
 
     except FileNotFoundError:
         print(f'{args.name} Not Found!')
