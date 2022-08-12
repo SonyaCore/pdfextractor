@@ -14,6 +14,15 @@ Output Name
 
 --metadata, -m
 Show Metadata
+
+--encrypt, -e         
+Encrypt PDF
+
+--decrypt, -d         
+Decrypt PDF
+
+--password [PASSWORD], -pass [PASSWORD]
+Set Password
   ```
 ### ‌Installing Requirements
 ```
